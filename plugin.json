@@ -1,0 +1,147 @@
+{
+  "tesserae_compat": "1.x",
+  "tesserae_min": "0.463.0",
+  "name": "poster",
+  "version": "0.1.0",
+  "kind": "widget",
+  "description": "A framed print for the wall, new each day: Bauhaus, Swiss, Constructivist, ridgeline, Memphis and sunburst posters drawn from a seed, public-domain museum prints, or AI posters with the words set in real type.",
+  "icon": "ph-frame-corners",
+  "requires": [
+    "network:api.artic.edu",
+    "network:www.artic.edu",
+    "network:en.wikipedia.org",
+    "network:fonts.googleapis.com",
+    "network:fonts.gstatic.com",
+    "network:fal.run"
+  ],
+  "supports": {
+    "sizes": ["sm", "md", "lg"]
+  },
+  "design": {
+    "palette": "extended"
+  },
+  "render": {
+    "full_bleed": true,
+    "needs_network": true,
+    "warm_ahead_s": 120
+  },
+  "settings": [
+    {
+      "name": "fal_api_key",
+      "type": "string",
+      "label": "fal.ai API key (AI posters)",
+      "secret": true,
+      "default": "",
+      "help": "Only the AI styles need one, at about US$0.04 a poster with Nano Banana or US$0.01 with FLUX Schnell. Each subject is painted once per style and shape, then kept. Leave empty to use the key under Settings › Generative AI. Get one at https://fal.ai/dashboard/keys."
+    },
+    {
+      "name": "gen_daily_usd",
+      "type": "slider",
+      "label": "AI budget per day",
+      "default": 1,
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "US$",
+      "help": "The most the AI styles may spend in a day. One poster a day is about US$0.04. 0 is no limit."
+    },
+    {
+      "name": "gen_per_refresh",
+      "type": "number",
+      "label": "New AI posters started per preview",
+      "default": 1,
+      "help": "How many new pictures one settled preview in the editor may start (1 to 50)."
+    },
+    {
+      "name": "gen_parallel",
+      "type": "number",
+      "label": "AI posters made at once",
+      "default": 2,
+      "help": "How many pictures fal.ai works on side by side (1 to 8)."
+    }
+  ],
+  "cell_options": [
+    {
+      "name": "style",
+      "type": "select",
+      "label": "Style",
+      "default": "ausstellung",
+      "choices": [
+        { "value": "ausstellung", "label": "Ausstellung: Bauhaus patterns (free)" },
+        { "value": "swiss", "label": "Swiss: big type and circles (free)" },
+        { "value": "constructivist", "label": "Constructivist: red and black diagonals (free)" },
+        { "value": "ridgeline", "label": "Ridgeline: stacked waves on black (free)" },
+        { "value": "memphis", "label": "Memphis: confetti shapes (free)" },
+        { "value": "sunburst", "label": "Sunburst: mid-century sun and hills (free)" },
+        { "value": "gallery", "label": "Gallery print: modern masters (free)" },
+        { "value": "ukiyoe", "label": "Gallery print: Japanese woodblocks (free)" },
+        { "value": "woodblock", "label": "Woodblock: ink print with a Japanese label (AI)" },
+        { "value": "travel", "label": "Travel poster: screen print with a place name (AI)" },
+        { "value": "deco", "label": "Art deco: national-park poster (AI)" },
+        { "value": "riso", "label": "Risograph: two-colour print (AI)" },
+        { "value": "botanical", "label": "Botanical plate (AI)" },
+        { "value": "linocut", "label": "Linocut: black ink and one colour (AI)" },
+        { "value": "mix_free", "label": "Mix: a different free style each time" },
+        { "value": "mix_all", "label": "Mix: any style, AI included" }
+      ]
+    },
+    {
+      "name": "change",
+      "type": "select",
+      "label": "New poster",
+      "default": "daily",
+      "help": "How often the poster changes. An AI style paints each new subject once, so hourly with a long list costs the most.",
+      "choices": [
+        { "value": "daily", "label": "Every day" },
+        { "value": "weekly", "label": "Every week" },
+        { "value": "hourly", "label": "Every hour" },
+        { "value": "render", "label": "Every render" }
+      ]
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "label": "Title (drawn styles)",
+      "default": "",
+      "help": "The headline on a drawn poster. {weekday}, {day}, {month}, {monthnum} and {year} become to-day's. Empty uses the style's own, mostly the weekday."
+    },
+    {
+      "name": "subtitle",
+      "type": "string",
+      "label": "Second line (drawn styles)",
+      "default": "",
+      "help": "The small line under the title, with the same placeholders. Empty uses the date."
+    },
+    {
+      "name": "subjects",
+      "type": "textarea",
+      "label": "Subjects (AI styles)",
+      "default": "",
+      "help": "One a line, taken in turn: subject | label | year. For example: Aireys Inlet | Split Point | 1891, or Laughing kookaburra | ワライカワセミ. The subject is looked up on Wikipedia for the small print. Empty uses the style's own list of birds, places, parks or plants."
+    },
+    {
+      "name": "facts",
+      "type": "boolean",
+      "label": "Small print from Wikipedia",
+      "default": true,
+      "help": "The opening sentences of the subject's Wikipedia article on the travel, linocut and botanical posters."
+    },
+    {
+      "name": "model",
+      "type": "select",
+      "label": "AI model",
+      "default": "nano_banana_t2i",
+      "choices": [
+        { "value": "nano_banana_t2i", "label": "Nano Banana (about US$0.04, best)" },
+        { "value": "flux_schnell", "label": "FLUX.1 Schnell (about US$0.01, rougher)" }
+      ]
+    },
+    {
+      "name": "museum_query",
+      "type": "string",
+      "label": "Museum search (gallery styles)",
+      "default": "",
+      "help": "Your own search of the Art Institute of Chicago's public-domain works, such as Hokusai, Mondrian or still life. Empty walks the style's own list of artists."
+    }
+  ]
+}
