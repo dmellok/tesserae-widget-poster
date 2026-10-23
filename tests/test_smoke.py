@@ -289,3 +289,35 @@ def test_words_follow_the_picture_on_show(tmp_path, monkeypatch):
     d = S.fetch({"style": "riso", "subjects": "Espresso"}, {}, ctx=ctx(tmp_path))
     assert d["pic"]
     assert d["subject"]["name"] == "Sailboat" and d["subject"]["painting"] == "Espresso"
+
+
+# ------------------------------------------------------------- the options panel
+
+
+def test_options_panel_is_short_and_keeps_saved_cells():
+    opts = MANIFEST["cell_options"]
+    by = {o["name"]: o for o in opts}
+    always = [o["name"] for o in opts if not o.get("show_if") and not o.get("advanced")]
+    assert always == ["style", "change"]
+    first_adv = next(i for i, o in enumerate(opts) if o.get("advanced"))
+    assert all(o.get("advanced") for o in opts[first_adv:])
+
+    def kinds(*want):
+        out = [s for s, (_, k, _) in S.STYLES.items() if k in want]
+        return out + [m for m, (_, ks) in S.MIXES.items() if set(want) & set(ks)]
+
+    assert set(by["title"]["show_if"]["style"]) == set(kinds("drawn"))
+    assert set(by["subtitle"]["show_if"]["style"]) == set(kinds("drawn"))
+    assert set(by["museum_query"]["show_if"]["style"]) == set(kinds("museum"))
+    assert set(by["subjects"]["show_if"]["style"]) == set(kinds("painted"))
+    assert set(by["model"]["show_if"]["style"]) == set(kinds("painted"))
+    assert set(by["facts"]["show_if"]["style"]) <= set(kinds("painted"))
+    for o in opts + MANIFEST["settings"]:
+        assert ":" not in o["label"] and "(" not in o["label"], o["label"]
+    old = json.loads((ROOT / "tests" / "options_v0_1_0.json").read_text("utf-8"))
+    assert set(old) == set(by)
+    for name, was in old.items():
+        o = by[name]
+        assert o["type"] == was["type"] and o.get("default") == was["default"], name
+        assert [c["value"] for c in o.get("choices", [])] == was["values"], name
+    assert "—" not in json.dumps(MANIFEST, ensure_ascii=False)

@@ -75,12 +75,14 @@ the small print and, on a woodblock, the Japanese title of its article.
 | Option | Notes |
 | --- | --- |
 | `style` | One of the fourteen, or a mix |
-| `change` | Every day, week, hour or render |
-| `title`, `subtitle` | The words on a drawn poster, with the placeholders above |
 | `subjects` | AI styles: one subject a line, `subject \| label \| year` |
-| `facts` | Small print from Wikipedia on the travel, linocut and botanical posters |
-| `model` | Nano Banana or FLUX.1 Schnell |
-| `museum_query` | Your own search of the museum's public-domain works, such as `Mondrian` |
+| `change` | Every day, week, hour or render |
+| `title`, `subtitle` | More options, drawn styles: the words on a drawn poster, with the placeholders above |
+| `museum_query` | More options, gallery styles: your own search of the museum's public-domain works, such as `Mondrian` |
+| `facts` | More options: small print from Wikipedia on the travel, linocut and botanical posters |
+| `model` | More options, AI styles: Nano Banana or FLUX.1 Schnell |
+
+Each option shows only for the styles it applies to. More options is a folded section on Tesserae 0.473 and later; an older Tesserae shows those options after the rest.
 
 ## Sources and credits
 

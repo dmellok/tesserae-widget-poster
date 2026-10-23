@@ -1,0 +1,67 @@
+{
+  "style": {
+    "type": "select",
+    "default": "ausstellung",
+    "values": [
+      "ausstellung",
+      "swiss",
+      "constructivist",
+      "ridgeline",
+      "memphis",
+      "sunburst",
+      "gallery",
+      "ukiyoe",
+      "woodblock",
+      "travel",
+      "deco",
+      "riso",
+      "botanical",
+      "linocut",
+      "mix_free",
+      "mix_all"
+    ]
+  },
+  "change": {
+    "type": "select",
+    "default": "daily",
+    "values": [
+      "daily",
+      "weekly",
+      "hourly",
+      "render"
+    ]
+  },
+  "title": {
+    "type": "string",
+    "default": "",
+    "values": []
+  },
+  "subtitle": {
+    "type": "string",
+    "default": "",
+    "values": []
+  },
+  "subjects": {
+    "type": "textarea",
+    "default": "",
+    "values": []
+  },
+  "facts": {
+    "type": "boolean",
+    "default": true,
+    "values": []
+  },
+  "model": {
+    "type": "select",
+    "default": "nano_banana_t2i",
+    "values": [
+      "nano_banana_t2i",
+      "flux_schnell"
+    ]
+  },
+  "museum_query": {
+    "type": "string",
+    "default": "",
+    "values": []
+  }
+}
